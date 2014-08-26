@@ -1,6 +1,7 @@
 // Console-polyfill. MIT license.
 // https://github.com/paulmillr/console-polyfill
 // Make it safe to do console.log() always.
+var global = window || this;// Using `this` for web workers.
 (function(con) {
   'use strict';
   var prop, method;
@@ -12,4 +13,4 @@
      'show,table,time,timeEnd,timeline,timelineEnd,timeStamp,trace,warn').split(',');
   while (prop = properties.pop()) con[prop] = con[prop] || empty;
   while (method = methods.pop()) con[method] = con[method] || dummy;
-})(this.console = this.console || {}); // Using `this` for web workers.
+})(global.console = global.console || {});
